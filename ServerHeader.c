@@ -87,8 +87,8 @@ if(argc==3){
 parg=&argv[2];
 port=atoi(*parg); //conversion into integer
         
-        if (port<0 || port>65535){                
-              puts("\nPlease insert a port number between 0 and 65535\n"); 
+        if (port<1 || port>65535){                
+              puts("\nPlease insert a port number between 1 and 65535\n"); 
               return 1;
               }
   
