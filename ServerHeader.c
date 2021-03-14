@@ -53,6 +53,7 @@ int main(int argc, char *argv[]){
     unsigned int port = 80;
     struct hostent *hp;
     struct sockaddr_in address;
+    char *pch;
     #ifdef _WIN32
         char* HTTP_MSG = "GET / HTTP/1.0\r\n\r\n";
     #else
@@ -88,12 +89,19 @@ int main(int argc, char *argv[]){
                 
         parg = &argv[2];
         port = atoi(*parg); //conversion into integer
-            
         if (port<1 || port>65535){                
             puts("\nPlease insert a port number between 1 and 65535\n"); 
             return 1;
               }
         }
+
+
+	pch = strstr(argv[1], "https://");
+	if(pch || port == 443){
+		puts("\nSorry: the https protocol is not supported.\n");
+		return 1; 
+	}
+
 
     // resolves the hostname
     if ((hp = gethostbyname(argv[1])) == NULL) {  // get IP address 
