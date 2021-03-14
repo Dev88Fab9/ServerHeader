@@ -25,7 +25,7 @@ compile with:
     
 #include<stdio.h> //for puts(), getchar(), printf(), fprintf(), perror()
 #include<stdlib.h>//for system()
-#include<string.h> //for memset()
+#include<string.h> //for memset(). strcat()
 #define BUFSIZE 512 //MAX BYTES at once
 #define MIN_VER 5   //Minor version
 #define MAJ_VER 0   //Major version
@@ -53,7 +53,11 @@ int main(int argc, char *argv[]){
     unsigned int port = 80;
     struct hostent *hp;
     struct sockaddr_in address;
-    char* HTTP_MSG = "GET / HTTP/1.0\n\n";
+    #ifdef _WIN32
+        char* HTTP_MSG = "GET / HTTP/1.0\r\n\r\n";
+    #else
+        char* HTTP_MSG = "GET / HTTP/1.0\n\n";
+    #endif  
     char **parg; 
     char buf[BUFSIZE];
 
