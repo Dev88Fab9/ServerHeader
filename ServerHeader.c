@@ -25,7 +25,7 @@ compile with:
     
 #include<stdio.h> //for puts(), getchar(), printf(), fprintf(), perror()
 #include<stdlib.h>//for system()
-#include<string.h> //for memset(). strcat()
+#include<string.h> //for memset()
 #define BUFSIZE 512 //MAX BYTES at once
 #define MIN_VER 5   //Minor version
 #define MAJ_VER 0   //Major version
