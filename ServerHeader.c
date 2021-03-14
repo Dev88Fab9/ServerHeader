@@ -196,7 +196,6 @@ int main(int argc, char *argv[]){
 			#else
 			    perror("Reception error: ");       
             #endif 
-            return 1;
                    }
         else { 
             printf("\n\nConnection closed\n");
