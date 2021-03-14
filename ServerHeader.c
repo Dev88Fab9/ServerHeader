@@ -18,7 +18,7 @@ compile with:
     
         
     from Dev-Cpp pass the following options:
-      compilatore: -mwindows -console
+      compiler: -mwindows -console
       linker: -lws2_32 
      
     */
