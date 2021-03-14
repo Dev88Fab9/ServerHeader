@@ -62,11 +62,11 @@ int main(int argc, char *argv[]){
 	#ifdef _WIN32
 		wVersionRequested=MAKEWORD(2, 2);             
                                          
-	if(WSAStartup(wVersionRequested, &wsaData)<0){
-		dwError = WSAGetLastError();                                         
-		printf("Unable to initialize winsock\r\n%ld", dwError);       
-        return 1;
-    }                                      
+		if(WSAStartup(wVersionRequested, &wsaData)<0){
+			dwError = WSAGetLastError();                                         
+			printf("Unable to initialize winsock\r\n%ld", dwError);       
+	        return 1;
+	    }                                      
 	#endif     
 
                  
