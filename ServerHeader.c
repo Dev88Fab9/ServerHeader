@@ -60,15 +60,15 @@ int main(int argc, char *argv[]){
 
      
 	#ifdef _WIN32
-		wVersionRequested=MAKEWORD(2, 2);             
-                                         
+		wVersionRequested=MAKEWORD(2, 2);            
+		 
+        // Initialize the Winsock in Windows (WS2_32.dll)                                 
 		if(WSAStartup(wVersionRequested, &wsaData)<0){
 			dwError = WSAGetLastError();                                         
 			printf("Unable to initialize winsock\r\n%ld", dwError);       
 	        return 1;
 	    }                                      
 	#endif     
-
                  
 	if(argc>3||argc<2){
 		fprintf(stderr, "Usage: ServerHeader <IP> or <hostname>\n");
@@ -89,7 +89,7 @@ int main(int argc, char *argv[]){
 			  }
 		}
 
-
+	// resolves the hostname
 	if ((hp = gethostbyname(argv[1])) == NULL) {  // get IP address 
 
 
@@ -108,7 +108,7 @@ int main(int argc, char *argv[]){
 				printf("Function failed with error: %ld\n", dwError);
 					  }   
 	#else
-		herror("IP address resolution error: ");
+		herror("Hostname resolution error: ");
 	#endif     
 		return 1;
 		}
@@ -142,7 +142,7 @@ int main(int argc, char *argv[]){
 
 	retop=connect(sockd, (struct sockaddr *) &address, sizeof(address));
          
-	if(retop==-1){
+	if(retop == -1){
          
 	    #ifdef _WIN32
 			dwError = WSAGetLastError();
@@ -162,7 +162,7 @@ int main(int argc, char *argv[]){
 	printf("\n");
 	retop=send(sockd,HTTP_MSG,strlen(HTTP_MSG),0);           
 
-      if(retop==-1){
+      if(retop == -1){
                    
 		    #ifdef _WIN32
 				dwError = WSAGetLastError();
@@ -188,7 +188,7 @@ int main(int argc, char *argv[]){
            getchar();
                      }    
         
-        else if (retop ==-1){
+        else if (retop == -1){
             #ifdef _WIN32
 			    dwError = WSAGetLastError();
 			    fprintf(stderr,"Reception error: %ld\n", dwError);       
@@ -231,11 +231,11 @@ void cls(){
 
 void header(){
       
-	char* msg="This utility returns the data header of an HTTP server.\nIt's \
-	distribuited according to GPL license v2.\nFor more details: \
-	http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt\nThere's no implicit \
-	or explicit warranty, you use it at your own risk!\n\nAuthor: \
-	Fabrizio Pani - fabph@hotmail.com\n\n";
+	char* msg="This utility returns the data header of an HTTP server.\nIt is \
+distribuited according to GPL license v2.\nFor more details: \n\
+http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt\n\
+There's no implicit or explicit warranty, you use it at your own risk!\n\
+Author: Fabrizio Pani - fabph@hotmail.com\n\n";
 	printf("ServerHeader %d.%d\n %s", MAJ_VER, MIN_VER, msg);
       
       }
