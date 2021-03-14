@@ -45,9 +45,9 @@ void cls(void);
 void header(void); 
 
     
-int main(int argc,char *argv[]){
+int main(int argc, char *argv[]){
      
-    short int sockd,retop;
+    short int sockd, retop;
     unsigned int port = 80;
     struct hostent *hp;
     struct sockaddr_in address;
@@ -60,19 +60,19 @@ int main(int argc,char *argv[]){
 
      
 	#ifdef _WIN32
-		wVersionRequested=MAKEWORD(2,2);             
+		wVersionRequested=MAKEWORD(2, 2);             
                                          
-	if(WSAStartup(wVersionRequested,&wsaData)<0){
+	if(WSAStartup(wVersionRequested, &wsaData)<0){
 		dwError = WSAGetLastError();                                         
-		printf("Unable to initialize winsock\r\n%ld",dwError);       
+		printf("Unable to initialize winsock\r\n%ld", dwError);       
         return 1;
     }                                      
 	#endif     
 
                  
 	if(argc>3||argc<2){
-		fprintf(stderr,"Usage: ServerHeader <IP> or <hostname>\n");
-		fprintf(stderr,"Usage: ServerHeader <IP> or <hostname> <port number>\
+		fprintf(stderr, "Usage: ServerHeader <IP> or <hostname>\n");
+		fprintf(stderr, "Usage: ServerHeader <IP> or <hostname> <port number>\
  (default: 80)\n");
 		return 1;
    }         
@@ -120,7 +120,7 @@ int main(int argc,char *argv[]){
 					  
 			#ifdef _WIN32
 			    dwError = WSAGetLastError();
-			    fprintf(stderr,"Socket error: %ld\n",dwError);       
+			    fprintf(stderr,"Socket error: %ld\n", dwError);       
 			    WSACleanup();
 		    #else
 			    perror("Socket error: ");       
@@ -140,13 +140,13 @@ int main(int argc,char *argv[]){
 	printf("Port : %d\n", ntohs(address.sin_port));
 
 
-	retop=connect(sockd, (struct sockaddr *) &address,sizeof(address));
+	retop=connect(sockd, (struct sockaddr *) &address, sizeof(address));
          
 	if(retop==-1){
          
 	    #ifdef _WIN32
 			dwError = WSAGetLastError();
-		    fprintf(stderr,"\nConnection error: %ld\n",dwError);       
+		    fprintf(stderr,"\nConnection error: %ld\n", dwError);       
 		    WSACleanup();
 	    #else
 		    perror("Connection error: ");       
@@ -166,7 +166,7 @@ int main(int argc,char *argv[]){
                    
 		    #ifdef _WIN32
 				dwError = WSAGetLastError();
-			    fprintf(stderr,"Server communication error: %ld\n",dwError);       
+			    fprintf(stderr,"Server communication error: %ld\n", dwError);       
 			    WSACleanup();
 			#else
 				perror("Server communication error: ");       
@@ -191,7 +191,7 @@ int main(int argc,char *argv[]){
         else if (retop ==-1){
             #ifdef _WIN32
 			    dwError = WSAGetLastError();
-			    fprintf(stderr,"Reception error: %ld\n",dwError);       
+			    fprintf(stderr,"Reception error: %ld\n", dwError);       
 			    WSACleanup();
 			#else
 			    perror("Reception error: ");       
@@ -236,6 +236,6 @@ void header(){
 	http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt\nThere's no implicit \
 	or explicit warranty, you use it at your own risk!\n\nAuthor: \
 	Fabrizio Pani - fabph@hotmail.com\n\n";
-	printf("ServerHeader %d.%d\n %s",MAJ_VER, MIN_VER,msg);
+	printf("ServerHeader %d.%d\n %s", MAJ_VER, MIN_VER, msg);
       
       }
