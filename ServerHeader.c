@@ -22,7 +22,8 @@ compile with:
       linker: -lws2_32 
      
     */
-    
+#include <openssl/ssl.h>
+#include <openssl/err.h>    
 #include<stdio.h> //for puts(), getchar(), printf(), fprintf(), perror()
 #include<stdlib.h>//for system()
 #include<string.h> //for memset()
@@ -220,9 +221,10 @@ int main(int argc, char *argv[]){
 void cleanup(int sockd){
     
     #ifdef _WIN32
+		if(sockd)
+			closesocket(sockd);
         WSACleanup();
-        if(sockd)
-            closesocket(sockd);
+
     #else
         if(sockd)
             close(sockd);
